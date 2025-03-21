@@ -2,6 +2,7 @@
 #include<SDL.h>
 #include"Baseoject.h"
 #include"comfunc.h"
+#include"map_game.hpp"
 
 Baseoject gBackroud;
 bool InitData ()
@@ -31,8 +32,7 @@ bool InitData ()
 }
 bool loadbackgroud ()
 {
-
-    return gBackroud.LoadImg("anh.jpg", gRender);
+    return gBackroud.LoadImg("anh/anh.jpg", gRender);
 }
 void close()
 {
@@ -57,8 +57,10 @@ int main(int argc, char* argv[])
         std::cout << "Failed to load background!" << std::endl;
         return -1;
     }
-
-    bool is_quit=false;
+    GameMap game_MAP;
+    game_MAP.LoadMAP("");
+    game_MAP.LoadTiles(gRender);
+    bool is_quit=false;G
     while(!is_quit)
     {
         while(SDL_PollEvent(&gEvent)!=0)
@@ -71,6 +73,7 @@ int main(int argc, char* argv[])
         SDL_SetRenderDrawColor(gRender,255,255,255,255);
         SDL_RenderClear(gRender);
         gBackroud.render(gRender,NULL);
+        game_MAP.DrawMap(gRender);
         SDL_RenderPresent(gRender);
     }
     close();

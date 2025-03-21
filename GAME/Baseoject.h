@@ -1,5 +1,6 @@
 #include"comfunc.h"
-
+#ifndef BASEOJECT_H
+#define BASEOJECT_H
 class Baseoject
 {
 public:
@@ -25,3 +26,4 @@ private:
     SDL_Texture* p_objcet;
     SDL_Rect rect_;
 };
+#endif

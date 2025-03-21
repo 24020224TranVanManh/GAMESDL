@@ -2,7 +2,7 @@
 1742528675 source:d:\dai hoc\gamesdl\game\comfunc.cpp
 	"comfunc.h"
 
-1742546803 d:\dai hoc\gamesdl\game\comfunc.h
+1742578943 d:\dai hoc\gamesdl\game\comfunc.h
 	<iostream>
 	<SDL.h>
 	<string>
@@ -401,7 +401,7 @@
 	"begin_code.h"
 	"close_code.h"
 
-1742546666 source:d:\dai hoc\gamesdl\game\game.cpp
+1742578943 source:d:\dai hoc\gamesdl\game\game.cpp
 	<iostream>
 	<SDL.h>
 	"Baseoject.h"
@@ -413,10 +413,19 @@
 	"begin_code.h"
 	"close_code.h"
 
-1742547006 source:d:\dai hoc\gamesdl\game\baseoject.cpp
+1742579220 source:d:\dai hoc\gamesdl\game\baseoject.cpp
 	"Baseoject.h"
 	"comfunc.h"
 
-1742543954 d:\dai hoc\gamesdl\game\baseoject.h
+1742574449 d:\dai hoc\gamesdl\game\baseoject.h
+	"comfunc.h"
+
+1742579163 source:d:\dai hoc\gamesdl\game\map_game.cpp
+	"Baseoject.h"
+	"comfunc.h"
+	"map_game.hpp"
+
+1742574130 d:\dai hoc\gamesdl\game\map_game.hpp
+	"Baseoject.h"
 	"comfunc.h"
 
