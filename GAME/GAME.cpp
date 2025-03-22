@@ -58,9 +58,9 @@ int main(int argc, char* argv[])
         return -1;
     }
     GameMap game_MAP;
-    game_MAP.LoadMAP("");
+    game_MAP.LoadMAP("anh/0123.txt");
     game_MAP.LoadTiles(gRender);
-    bool is_quit=false;G
+    bool is_quit=false;
     while(!is_quit)
     {
         while(SDL_PollEvent(&gEvent)!=0)

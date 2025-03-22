@@ -16,7 +16,7 @@ void GameMap::LoadMAP(char* name)
     {
         for(int j=0;j<Map_X;j++)
         {
--            fscanf(fi,"%d",&game_map.tile[i][j]);
+-           fscanf(fi,"%d",&game_map.tile[i][j]);
             int val=game_map.tile[i][j];
             if(val>0)
             {
@@ -40,11 +40,11 @@ void GameMap::LoadMAP(char* name)
 }
 void GameMap::LoadTiles(SDL_Renderer* screen)
 {
-    char file_img[10];
+    char file_img[30];
     FILE*fi = NULL;
     for(int i=0;i< 20;i++)
     {
-        sprintf(file_img,"map/%d.jpg",i);
+        sprintf(file_img,"anh/%d.jpg",i);
         fopen_s(&fi,file_img,"rb");
         if(fi==NULL)
         {
@@ -68,16 +68,18 @@ void GameMap::DrawMap(SDL_Renderer* screen)
     x2= x1+ WIDTH+ (x1==0 ? 0:TILE_SIZE);
     y1= (game_map.start_y%TILE_SIZE)*-1;
     y2= y1+ HEIGHT+ (y1==0 ? 0:TILE_SIZE);
-    for(int i=y1;i<=y2;i++)
+    for(int i=y1;i<=y2;i=i+TILE_SIZE)
     {
         maP_x=game_map.start_x/TILE_SIZE;
-        for(int j=x1;j<=x2;j++)
+        for(int j=x1;j<=x2;j=j+TILE_SIZE)
         {
-            int val=game_map.tile[maP_y][maP_x];
-            if(val>0)
+             if (maP_x >= 0 && maP_x < Map_X && maP_y >= 0 && maP_y < Map_Y)
+            {int val=game_map.tile[maP_y][maP_x];
+            if(val>0 && val<20)
             {
                 tile_mat[val].SetRect(j,i);
                 tile_mat[val].render(screen);
+            }
             }
             maP_x++;
         }

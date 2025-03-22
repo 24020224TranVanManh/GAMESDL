@@ -21,6 +21,7 @@ public:
     }
     bool LoadImg(char* path,SDL_Renderer* Color);
     void render (SDL_Renderer* des,const SDL_Rect* clip=NULL);
+    void render2 (SDL_Renderer* des,const SDL_Rect* clip=NULL);
     void free();
 private:
     SDL_Texture* p_objcet;

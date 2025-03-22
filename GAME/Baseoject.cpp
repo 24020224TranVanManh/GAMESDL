@@ -35,10 +35,16 @@ bool Baseoject::LoadImg(char* path,SDL_Renderer* Color)
 }
 void Baseoject::render (SDL_Renderer* des,const SDL_Rect* Clip)
 {
-    /*SDL_Rect renderquad = {rect_.x,rect_.y,rect_.w,rect_.h};
-    SDL_RenderCopy(des,p_objcet,Clip,&renderquad);*/
-    SDL_Rect renderquad = {0, 0, WIDTH, HEIGHT}; // Full màn hình
-    SDL_RenderCopy(des, p_objcet, Clip, &renderquad);
+    SDL_Rect renderquad = {rect_.x,rect_.y,rect_.w,rect_.h};
+    SDL_RenderCopy(des,p_objcet,Clip,&renderquad);
+    /*SDL_Rect renderquad = {0, 0, WIDTH, HEIGHT}; // Full màn hình
+    SDL_RenderCopy(des, p_objcet, Clip, &renderquad);*/
+}
+void Baseoject::render2 (SDL_Renderer* des,const SDL_Rect* Clip)
+{
+    SDL_Rect renderquad = {rect_.x,rect_.y,rect_.w,rect_.h};
+    SDL_RenderCopy(des,p_objcet,Clip,&renderquad);
+
 }
 void Baseoject::free()
 {
