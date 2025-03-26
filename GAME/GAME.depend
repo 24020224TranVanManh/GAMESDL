@@ -2,7 +2,7 @@
 1742528675 source:d:\dai hoc\gamesdl\game\comfunc.cpp
 	"comfunc.h"
 
-1742627360 d:\dai hoc\gamesdl\game\comfunc.h
+1742982840 d:\dai hoc\gamesdl\game\comfunc.h
 	<iostream>
 	<SDL.h>
 	<string>
@@ -401,12 +401,13 @@
 	"begin_code.h"
 	"close_code.h"
 
-1742601982 source:d:\dai hoc\gamesdl\game\game.cpp
+1742980352 source:d:\dai hoc\gamesdl\game\game.cpp
 	<iostream>
 	<SDL.h>
 	"Baseoject.h"
 	"comfunc.h"
 	"map_game.hpp"
+	"avartar.hpp"
 
 1738932426 c:\sdl2\sdl2_image-2.8.5\x86_64-w64-mingw32\include\sdl2\sdl_image.h
 	"SDL.h"
@@ -414,11 +415,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1742601560 source:d:\dai hoc\gamesdl\game\baseoject.cpp
+1742981190 source:d:\dai hoc\gamesdl\game\baseoject.cpp
 	"Baseoject.h"
 	"comfunc.h"
 
-1742600516 d:\dai hoc\gamesdl\game\baseoject.h
+1742970806 d:\dai hoc\gamesdl\game\baseoject.h
 	"comfunc.h"
 
 1742625436 source:d:\dai hoc\gamesdl\game\map_game.cpp
@@ -429,4 +430,12 @@
 1742574130 d:\dai hoc\gamesdl\game\map_game.hpp
 	"Baseoject.h"
 	"comfunc.h"
+
+1742973088 d:\dai hoc\gamesdl\game\avartar.hpp
+	"Baseoject.h"
+	"comfunc.h"
+	"map_game.hpp"
+
+1742982747 source:d:\dai hoc\gamesdl\game\avartar.cpp
+	"avartar.hpp"
 

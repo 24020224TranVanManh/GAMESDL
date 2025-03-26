@@ -14,15 +14,22 @@ Baseoject::~Baseoject()
 {
     free();
 }
-bool Baseoject::LoadImg(char* path,SDL_Renderer* Color)
+ bool Baseoject::LoadImg(char* path,SDL_Renderer* renderer)
 {
     free();
     SDL_Texture* new_text=NULL;
     SDL_Surface* load_surface=IMG_Load(path);
     if(load_surface!=NULL)
     {
-        //SDL_SetColorKey(load_surface,SDL_TRUE,Color_R,SDL_TRUE,Color_G,SDL_TRUE,Color_B);
-        new_text=SDL_CreateTextureFromSurface(Color,load_surface);
+        /*SDL_SetColorKey(load_surface,SDL_TRUE,Color_R,SDL_TRUE,Color_G,SDL_TRUE,Color_B);
+        SDL_SetColorKey()
+        new_text=SDL_CreateTextureFromSurface(Color,load_surface);*/
+        Uint32 color_key = SDL_MapRGB(load_surface->format, Color_R, Color_G, Color_B);
+        SDL_SetColorKey(load_surface, SDL_TRUE, color_key);
+        // SDL_SetColorKey()
+
+        // SDL_CreateTextureFromSurface(Color, load_surface);
+        new_text = SDL_CreateTextureFromSurface(renderer, load_surface);
         if(new_text!=NULL)
         {
             rect_.w=load_surface->w;

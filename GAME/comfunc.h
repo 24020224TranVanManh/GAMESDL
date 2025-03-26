@@ -11,7 +11,7 @@ static SDL_Renderer* gRender = NULL;
 static  SDL_Event gEvent;
 
 const int WIDTH = 1280;
-const int HEIGHT = 640;
+const int HEIGHT = 980;
 const int BBF = 32;
 const int Color_R = 167;
 const int Color_G = 175;
@@ -27,5 +27,13 @@ typedef struct Map
     int max_y;
     int tile[Map_X][Map_Y];
     char* file_name;
+};
+typedef struct INPUT
+{
+    int left;
+    int right;
+    int up;
+    int down;
+    int jump;
 };
 #endif

@@ -42,6 +42,8 @@
 		<Unit filename="Baseoject.cpp" />
 		<Unit filename="Baseoject.h" />
 		<Unit filename="GAME.cpp" />
+		<Unit filename="avartar.cpp" />
+		<Unit filename="avartar.hpp" />
 		<Unit filename="comfunc.cpp" />
 		<Unit filename="comfunc.h" />
 		<Unit filename="map_game.cpp" />

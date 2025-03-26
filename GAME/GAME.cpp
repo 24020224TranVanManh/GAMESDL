@@ -3,7 +3,7 @@
 #include"Baseoject.h"
 #include"comfunc.h"
 #include"map_game.hpp"
-
+#include"avartar.hpp"
 Baseoject gBackroud;
 bool InitData ()
 {
@@ -60,6 +60,10 @@ int main(int argc, char* argv[])
     GameMap game_MAP;
     game_MAP.LoadMAP("anh/0123.txt");
     game_MAP.LoadTiles(gRender);
+    AVARTAR P_player;
+    P_player.LoadImg("nhanvat/right.png",gRender);
+    P_player.set_clips();
+
     bool is_quit=false;
     while(!is_quit)
     {
@@ -69,11 +73,13 @@ int main(int argc, char* argv[])
             {
                 is_quit=true;
             }
+            P_player.EVENT(gEvent,gRender);
         }
         SDL_SetRenderDrawColor(gRender,255,255,255,255);
         SDL_RenderClear(gRender);
         gBackroud.render(gRender,NULL);
         game_MAP.DrawMap(gRender);
+        P_player.show(gRender);
         SDL_RenderPresent(gRender);
     }
     close();
