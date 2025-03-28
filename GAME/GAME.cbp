@@ -48,6 +48,8 @@
 		<Unit filename="comfunc.h" />
 		<Unit filename="map_game.cpp" />
 		<Unit filename="map_game.hpp" />
+		<Unit filename="move.cpp" />
+		<Unit filename="move.hpp" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

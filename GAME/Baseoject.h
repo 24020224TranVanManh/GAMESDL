@@ -19,7 +19,7 @@ public:
     {
         return p_objcet;
     }
-    virtual bool LoadImg(char* path,SDL_Renderer* Color);
+    virtual bool LoadImg(const char* path,SDL_Renderer* Color);
     void render (SDL_Renderer* des,const SDL_Rect* clip=NULL);
     void render2 (SDL_Renderer* des,const SDL_Rect* clip=NULL);
     void free();

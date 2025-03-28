@@ -10,15 +10,16 @@ static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRender = NULL;
 static  SDL_Event gEvent;
 
-const int WIDTH = 1280;
-const int HEIGHT = 980;
+const int WIDTH = 736;
+const int HEIGHT = 900;
 const int BBF = 32;
 const int Color_R = 167;
 const int Color_G = 175;
 const int Color_B = 180;
-#define  TILE_SIZE 64
-#define  Map_X 410
-#define  Map_Y 20
+#define  TILE_SIZE 32
+#define  Map_X 400
+#define  Map_Y 10
+
 typedef struct Map
 {
     int start_x;
@@ -36,4 +37,5 @@ typedef struct INPUT
     int down;
     int jump;
 };
+
 #endif

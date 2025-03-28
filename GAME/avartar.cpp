@@ -1,126 +1,93 @@
-#include"avartar.hpp"
 
-AVARTAR::~AVARTAR(){}
+#include "avartar.hpp"
+
 AVARTAR::AVARTAR()
 {
-    frame=0;
-    x_pos=0;
-    y_pos=0;
-    x_val=0;
-    y_val=0;
-    width_frame=0;
-    heigh_frame=0;
-    status=-1;
+    player_texture = NULL;
+    player_rect = {0, 0, 150, 150};
+    velX = 0;
+    velY = 0;
 }
 
-bool AVARTAR::LoadImg(char* name,SDL_Renderer* screen)
+AVARTAR::~AVARTAR()
 {
-    bool ret=Baseoject::LoadImg(name,screen);
-
-    if (ret==true)
-    {
-        width_frame=rect_.w/8;
-        heigh_frame=rect_.h;
-    }
-    return ret;
-
-}
-void AVARTAR::set_clips()
-{
-    if(width_frame>0 && heigh_frame>0)
-    {
-        frame_clip[0].x=0;
-        frame_clip[0].y=0;
-        frame_clip[0].w=width_frame;
-        frame_clip[0].h=heigh_frame;
-
-        frame_clip[1].x=width_frame;
-        frame_clip[1].y=0;
-
-        frame_clip[1].x=width_frame;
-        frame_clip[1].y=0;
-
-        frame_clip[2].x=2*width_frame;
-        frame_clip[2].y=0;
-        frame_clip[3].x=3*width_frame;
-        frame_clip[3].y=0;
-        frame_clip[4].x=4*width_frame;
-        frame_clip[4].y=0;
-        frame_clip[5].x=5*width_frame;
-        frame_clip[5].y=0;
-        frame_clip[6].x=6*width_frame;
-        frame_clip[6].y=0;
-        frame_clip[7].x=7*width_frame;
-        frame_clip[7].y=0;
-        frame_clip[8].x=8*width_frame;
-        frame_clip[8].y=0;
+    if (player_texture != NULL) {
+        SDL_DestroyTexture(player_texture);
+        player_texture = NULL;
     }
 }
-void AVARTAR::show(SDL_Renderer* des)
+
+bool AVARTAR::LoadImg(const char* name, SDL_Renderer* renderer)
 {
-    if(status==WALK_LEFT)
-    {
-     LoadImg("nhanvat/left.png",des);
+    SDL_Surface* surface = IMG_Load(name);
+    if (surface == NULL) {
+        std::cout << "Không thể load ảnh: " << name << " - " << IMG_GetError() << std::endl;
+        return false;
     }
-    else
-    {
-        LoadImg("nhanvat/right.png",des);
-    }
-
-
-    if(Input_type.left==1 || Input_type.right==1 )
-    {
-        frame++;
-    }
-    else
-    {
-        frame=0;
-    }
-    if(frame>8) frame=0;
-    rect_.x=x_pos;
-    rect_.y=y_pos;
-    SDL_Rect* Clipp=&frame_clip[frame];
-    SDL_Rect renderQuad = {rect_.x,rect_.y,rect_.w,rect_.h};
-    SDL_RenderCopy(des,p_objcet,Clipp,&renderQuad);
+    player_texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_SetTextureBlendMode(player_texture, SDL_BLENDMODE_BLEND);
+    SDL_FreeSurface(surface);
+    return (player_texture != NULL);
 }
-void AVARTAR::EVENT (SDL_Event events,SDL_Renderer* screen)
+
+void AVARTAR::SetPosition(int x, int y)
 {
-    if(events.type==SDL_KEYDOWN)
-    {
-        switch(events.key.keysym.sym)
-        {
-            case SDLK_RIGHT:
-            {
-                status=WALK_RIGHT;
-                Input_type.right=1;
-            }
-            break;
-             case SDLK_LEFT:
-            {
-                status=WALK_LEFT;
-                Input_type.left=1;
-            }
-            break;
-             default:
+    player_rect.x = x;
+    player_rect.y = y;
+}
+
+void AVARTAR::Draw(SDL_Renderer* renderer)
+{
+    SDL_RenderCopy(renderer, player_texture, NULL, &player_rect);
+}
+
+void AVARTAR::HandleEvent(SDL_Event& e, SDL_Renderer* renderer)
+{
+    if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
+        switch (e.key.keysym.sym) {
+            case SDLK_LEFT: velX = -1; break;
+            case SDLK_RIGHT: velX = 1; break;
+            case SDLK_UP: velY = -1; break;
+            case SDLK_DOWN: velY = 1; break;
+            case SDLK_l:  // Khi ấn phím "1" thì bắn đạn
+                POW* new_pow = new POW();
+                if (new_pow->LoadImg("dan/1.png", renderer)) {
+                    new_pow->SetPosition(player_rect.x + player_rect.w / 9, player_rect.y);
+                    new_pow->SetDirection(0, -1); // Bay lên với tốc độ BULLET_SPEED
+                    pows.push_back(new_pow);
+                } else {
+                    std::cout << "Failed to load bullet image: " << IMG_GetError() << std::endl;
+                    delete new_pow; // Giải phóng nếu load thất bại
+                }
                 break;
         }
     }
-    else if (events.type==SDL_KEYUP)
-    {
-        switch(events.key.keysym.sym)
-        {
-            case SDLK_RIGHT:
-            {
-                status=WALK_RIGHT;
-                Input_type.right=0;
-            }
-            break;
-             case SDLK_LEFT:
-            {
-                status=WALK_LEFT;
-                Input_type.left=0;
-            }
-            break;
+    else if (e.type == SDL_KEYUP && e.key.repeat == 0) {
+        switch (e.key.keysym.sym) {
+            case SDLK_LEFT:
+            case SDLK_RIGHT: velX = 0; break;
+            case SDLK_UP:
+            case SDLK_DOWN: velY = 0; break;
         }
     }
 }
+
+void AVARTAR::UpdatePows()
+{
+    for (auto& pow : pows) {
+        pow->Update();
+    }
+}
+
+void AVARTAR::UpdatePosition()
+{
+    player_rect.x += velX;
+    player_rect.y += velY;
+
+    // Giới hạn nhân vật trong màn hình
+    if (player_rect.x < 0) player_rect.x = 0;
+    if (player_rect.y < 0) player_rect.y = 0;
+    if (player_rect.x > WIDTH - player_rect.w) player_rect.x = WIDTH - player_rect.w;
+    if (player_rect.y > HEIGHT - player_rect.h) player_rect.y = HEIGHT - player_rect.h;
+}
+

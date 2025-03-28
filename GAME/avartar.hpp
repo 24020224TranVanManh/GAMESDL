@@ -1,36 +1,67 @@
-#include"Baseoject.h"
+/*#include"Baseoject.h"
 #include"comfunc.h"
 #include"map_game.hpp"
+#include"power.h"
+#include<vector>
 #ifndef AVARTAR_h
 #define AVARTAR_H
-class AVARTAR: public Baseoject
+
+class AVARTAR
 {
 public:
     AVARTAR();
     ~AVARTAR();
-    enum WalkType
-    {
-        WALK_RIGHT = 0,
-        WALK_LEFT = 1,
-    };
-    bool LoadImg(char* name,SDL_Renderer* screen);
-    void show(SDL_Renderer* des);
-    void EVENT (SDL_Event events, SDL_Renderer* screen);
-    void set_clips();
+    bool LoadImg(const char* path, SDL_Renderer* renderer);
+    void Draw (SDL_Renderer* renderer);
+    void SetPosition(int x, int y);
+    void UpdatePosition();
+     void HandleEvent(SDL_Event& e,SDL_Renderer* renderer);
+     void set_bullet_list(std::vector<POW*> bullet_list)
+     {
+         pows=bullet_list;
+     }
+     void UpdatePows();
 private:
-    float x_val;
-    float y_val;
+    std::vector<POW*> pows;
+    SDL_Texture* player_texture;
+    SDL_Rect player_rect;
+    double velX,velY;
 
-    float x_pos;
-    float y_pos;
-
-    int width_frame;
-    int heigh_frame;
-    SDL_Rect frame_clip[8];
-    INPUT Input_type;
-    int frame;
-    int status;
 };
 
 #endif // AVARTAR_h
+*/
+#ifndef AVARTAR_H
+#define AVARTAR_H
+
+#include "Baseoject.h"
+#include "comfunc.h"
+#include "power.h"
+#include <vector>
+
+class AVARTAR
+{
+public:
+    AVARTAR();
+    ~AVARTAR();
+    bool LoadImg(const char* path, SDL_Renderer* renderer);
+    void Draw(SDL_Renderer* renderer);
+    void SetPosition(int x, int y);
+    void UpdatePosition();
+    void HandleEvent(SDL_Event& e, SDL_Renderer* renderer);
+    void set_bullet_list(std::vector<POW*> bullet_list)
+    {
+        pows = bullet_list;
+    }
+    void UpdatePows();
+    std::vector<POW*> get_pows() const { return pows; } // Thêm hàm để truy cập pows
+
+private:
+    std::vector<POW*> pows;
+    SDL_Texture* player_texture;
+    SDL_Rect player_rect;
+    double velX, velY;
+};
+
+#endif // AVARTAR_H
 

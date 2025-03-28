@@ -73,7 +73,7 @@ void GameMap::DrawMap(SDL_Renderer* screen)
         maP_x=game_map.start_x/TILE_SIZE;
         for(int j=x1;j<=x2;j=j+TILE_SIZE)
         {
-             if (maP_x >= 0 && maP_x < Map_X && maP_y >= 0 && maP_y < Map_Y)
+             //if (maP_x >= 0 && maP_x < Map_X && maP_y >= 0 && maP_y < Map_Y)
             {int val=game_map.tile[maP_y][maP_x];
             if(val>0 && val<20)
             {
