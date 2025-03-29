@@ -2,7 +2,7 @@
 1742528675 source:d:\dai hoc\gamesdl\game\comfunc.cpp
 	"comfunc.h"
 
-1743192115 d:\dai hoc\gamesdl\game\comfunc.h
+1743223531 d:\dai hoc\gamesdl\game\comfunc.h
 	<iostream>
 	<SDL.h>
 	<string>
@@ -401,19 +401,23 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743191135 source:d:\dai hoc\gamesdl\game\game.cpp
+1743255366 source:d:\dai hoc\gamesdl\game\game.cpp
 	<iostream>
 	<SDL.h>
 	"Baseoject.h"
 	"comfunc.h"
 	"avartar.hpp"
 	"item.h"
+	"enemy.h"
+	<cstdlib>
 	<iostream>
 	<SDL.h>
 	"Baseoject.h"
 	"comfunc.h"
 	"avartar.hpp"
 	"item.h"
+	"Enemy.h"
+	<cstdlib>
 
 1738932426 c:\sdl2\sdl2_image-2.8.5\x86_64-w64-mingw32\include\sdl2\sdl_image.h
 	"SDL.h"
@@ -421,11 +425,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743192115 source:d:\dai hoc\gamesdl\game\baseoject.cpp
+1743223180 source:d:\dai hoc\gamesdl\game\baseoject.cpp
 	"Baseoject.h"
 	"comfunc.h"
 
-1743191975 d:\dai hoc\gamesdl\game\baseoject.h
+1743223180 d:\dai hoc\gamesdl\game\baseoject.h
 	"comfunc.h"
 
 1743015484 source:d:\dai hoc\gamesdl\game\map_game.cpp
@@ -437,14 +441,21 @@
 	"Baseoject.h"
 	"comfunc.h"
 
-1743185171 d:\dai hoc\gamesdl\game\avartar.hpp
+1743245653 d:\dai hoc\gamesdl\game\avartar.hpp
 	"Baseoject.h"
 	"comfunc.h"
 	"power.h"
 	"item.h"
+	"Enemy.h"
+	<vector>
+	"Baseoject.h"
+	"comfunc.h"
+	"power.h"
+	"item.h"
+	"Enemy.h"
 	<vector>
 
-1743189516 source:d:\dai hoc\gamesdl\game\avartar.cpp
+1743256056 source:d:\dai hoc\gamesdl\game\avartar.cpp
 	"avartar.hpp"
 	"avartar.hpp"
 
@@ -455,27 +466,32 @@
 1743145255 d:\dai hoc\gamesdl\game\move.hpp
 	"comfunc.h"
 
-1743179419 d:\dai hoc\gamesdl\game\power.h
+1743256655 d:\dai hoc\gamesdl\game\power.h
 	"Baseoject.h"
 	"comfunc.h"
-	"Baseoject.h"
+	<SDL.h>
+	<SDL_image.h>
+	<iostream>
 	"comfunc.h"
 
-1743179472 source:d:\dai hoc\gamesdl\game\power.cpp
+1743256220 source:d:\dai hoc\gamesdl\game\power.cpp
 	"power.h"
-	"power.h"
+	"POWER.h"
 
-1743176670 d:\dai hoc\gamesdl\game\item.h
+1743223180 d:\dai hoc\gamesdl\game\item.h
 	"Baseoject.h"
 	"comfunc.h"
 
 1743176670 source:d:\dai hoc\gamesdl\game\item.cpp
 	"item.h"
 
-1743189497 source:d:\dai hoc\gamesdl\game\enemy.cpp
-	"enemy.h"
+1743254515 source:d:\dai hoc\gamesdl\game\enemy.cpp
+	"Enemy.h"
+	<iostream>
+	<cstdlib>
 
-1743189497 d:\dai hoc\gamesdl\game\enemy.h
+1743254515 d:\dai hoc\gamesdl\game\enemy.h
 	"Baseoject.h"
 	"comfunc.h"
+	<vector>
 

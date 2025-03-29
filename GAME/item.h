@@ -17,12 +17,12 @@ public:
     Item();
     ~Item();
     bool LoadImg(const char* path, SDL_Renderer* renderer);
-    void SetPosition(int x, int y);     // Đặt vị trí vật phẩm tại tọa độ (x, y)
+    void SetPosition(int x, int y);
     void Render(SDL_Renderer* renderer);
-    SDL_Rect GetRect() const { return item_rect; } // Lấy hình chữ nhật của vật phẩm để kiểm tra va chạm
+    SDL_Rect GetRect() const { return item_rect; }
     BulletType GetBulletType() const { return bullet_type; }
     bool IsActive() const { return is_active; }
-    void Deactivate() { is_active = false; } // Đánh dấu vật phẩm đã bị nhặt (ẩn vật phẩm)
+    void Deactivate() { is_active = false; }
     void SetBulletType(BulletType type) { bullet_type = type; }
 
 private:
