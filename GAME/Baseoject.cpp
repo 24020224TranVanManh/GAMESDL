@@ -1,103 +1,53 @@
-/*#include"Baseoject.h"
-#include"comfunc.h"
 
-Baseoject::Baseoject()
-{
-    p_objcet=NULL;
-    rect_.x=0;
-    rect_.y=0;
-    rect_.w=0;
-    rect_.h=0;
-}
-
-Baseoject::~Baseoject()
-{
-    free();
-}
- bool Baseoject::LoadImg(const char* path,SDL_Renderer* renderer)
-{
-    free();
-    SDL_Texture* new_text=NULL;
-    SDL_Surface* load_surface=IMG_Load(path);
-    if(load_surface!=NULL)
-    {
-
-        Uint32 color_key = SDL_MapRGB(load_surface->format, Color_R, Color_G, Color_B);
-        SDL_SetColorKey(load_surface, SDL_TRUE, color_key);
-        // SDL_SetColorKey()
-
-        // SDL_CreateTextureFromSurface(Color, load_surface);
-        new_text = SDL_CreateTextureFromSurface(renderer, load_surface);
-        if(new_text!=NULL)
-        {
-            rect_.w=load_surface->w;
-            rect_.h=load_surface->h;
-        }
-        SDL_FreeSurface(load_surface);
-    }
-    p_objcet=new_text;
-    return p_objcet!=NULL;
-}
-void Baseoject::render (SDL_Renderer* des,const SDL_Rect* Clip)
-{
-    SDL_Rect renderquad = {rect_.x,rect_.y,rect_.w,rect_.h};
-    SDL_RenderCopy(des,p_objcet,Clip,&renderquad);
-
-}
-
-void Baseoject::free()
-{
-    if(p_objcet!=NULL)
-    {
-        SDL_DestroyTexture(p_objcet);
-        p_objcet=NULL;
-        rect_.w=0;
-        rect_.h=0;
-    }
-    rect_ = {0, 0, 0, 0};
-}*/
 #include "Baseoject.h"
 #include <iostream>
 
+// Constructor mặc định của lớp Baseoject
 Baseoject::Baseoject() {
-    texture = NULL;
-    width = 0;
-    height = 0;
+    texture = NULL; // Khởi tạo texture là NULL (chưa tải hình ảnh)
+    width = 0;      // Đặt chiều rộng ban đầu là 0
+    height = 0;     // Đặt chiều cao ban đầu là 0
 }
 
+// Destructor của lớp Baseoject
 Baseoject::~Baseoject() {
-    free();
+    free(); // Gọi hàm free() để giải phóng tài nguyên (texture) khi đối tượng bị hủy
 }
 
+// Hàm tải hình ảnh từ file vào texture
 bool Baseoject::LoadImg(const char* path, SDL_Renderer* renderer) {
-    SDL_Surface* surface = IMG_Load(path);
-    if (!surface) {
-        std::cout << "Unable to load image: " << IMG_GetError() << std::endl;
-        return false;
+    SDL_Surface* surface = IMG_Load(path); // Tải hình ảnh từ đường dẫn (path) thành surface
+    if (!surface) { // Nếu tải hình ảnh thất bại
+        std::cout << "Unable to load image: " << IMG_GetError() << std::endl; // In thông báo lỗi từ SDL_image
+        return false; // Trả về false để báo hiệu thất bại
     }
-    texture = SDL_CreateTextureFromSurface(renderer, surface);
-    if (texture) {
-        width = surface->w;
-        height = surface->h;
+    texture = SDL_CreateTextureFromSurface(renderer, surface); // Chuyển surface thành texture để sử dụng với renderer
+    if (texture) { // Nếu texture được tạo thành công
+        width = surface->w; // Lấy chiều rộng từ surface và gán vào biến width
+        height = surface->h; // Lấy chiều cao từ surface và gán vào biến height
     }
-    SDL_FreeSurface(surface);
-    return texture != NULL;
+    SDL_FreeSurface(surface); // Giải phóng surface sau khi tạo texture
+    return texture != NULL; // Trả về true nếu texture được tạo thành công, false nếu thất bại
 }
 
+// Hàm vẽ texture lên màn hình
 void Baseoject::render(SDL_Renderer* renderer, const SDL_Rect* clip) {
-    SDL_Rect renderQuad = {0, 0, width, height};
-    if (clip != NULL) {
-        renderQuad.w = clip->w;
-        renderQuad.h = clip->h;
+    SDL_Rect renderQuad = {0, 0, width, height}; // Tạo hình chữ nhật renderQuad với vị trí (0, 0) và kích thước của texture
+    if (clip != NULL) { // Nếu có tham số clip (để cắt xén texture)
+        renderQuad.w = clip->w; // Đặt chiều rộng của renderQuad theo clip
+        renderQuad.h = clip->h; // Đặt chiều cao của renderQuad theo clip
     }
-    SDL_RenderCopy(renderer, texture, clip, &renderQuad);
+    SDL_RenderCopy(renderer, texture, clip, &renderQuad); // Sao chép texture lên màn hình
+    // - Tham số clip: phần của texture được lấy để vẽ (NULL nếu dùng toàn bộ texture)
+    // - Tham số renderQuad: vị trí và kích thước trên màn hình nơi texture được vẽ
 }
 
+// Hàm giải phóng texture
 void Baseoject::free() {
-    if (texture != NULL) {
-        SDL_DestroyTexture(texture);
-        texture = NULL;
-        width = 0;
-        height = 0;
+    if (texture != NULL) { // Kiểm tra xem texture đã được cấp phát chưa
+        SDL_DestroyTexture(texture); // Giải phóng texture để tránh rò rỉ bộ nhớ
+        texture = NULL; // Đặt lại con trỏ về NULL
+        width = 0;      // Đặt lại chiều rộng về 0
+        height = 0;     // Đặt lại chiều cao về 0
     }
 }

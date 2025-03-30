@@ -2,7 +2,7 @@
 1742528675 source:d:\dai hoc\gamesdl\game\comfunc.cpp
 	"comfunc.h"
 
-1743320096 d:\dai hoc\gamesdl\game\comfunc.h
+1743327582 d:\dai hoc\gamesdl\game\comfunc.h
 	<iostream>
 	<SDL.h>
 	<string>
@@ -401,22 +401,12 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743322289 source:d:\dai hoc\gamesdl\game\game.cpp
+1743336464 source:d:\dai hoc\gamesdl\game\game.cpp
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
-	"Baseoject.h"
-	"comfunc.h"
-	"avartar.hpp"
-	"item.h"
-	"Enemy.h"
-	<cstdlib>
-	<string>
-	<iostream>
-	<SDL.h>
-	<SDL_image.h>
-	<SDL_ttf.h>
+	<SDL_mixer.h>
 	"Baseoject.h"
 	"comfunc.h"
 	"avartar.hpp"
@@ -431,13 +421,11 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743321853 source:d:\dai hoc\gamesdl\game\baseoject.cpp
-	"comfunc.h"
+1743335405 source:d:\dai hoc\gamesdl\game\baseoject.cpp
 	"Baseoject.h"
 	<iostream>
 
-1743321853 d:\dai hoc\gamesdl\game\baseoject.h
-	"comfunc.h"
+1743335405 d:\dai hoc\gamesdl\game\baseoject.h
 	<SDL.h>
 	<SDL_image.h>
 
@@ -449,13 +437,7 @@
 	"Baseoject.h"
 	"comfunc.h"
 
-1743320271 d:\dai hoc\gamesdl\game\avartar.hpp
-	"Baseoject.h"
-	"comfunc.h"
-	"power.h"
-	"item.h"
-	"Enemy.h"
-	<vector>
+1743335651 d:\dai hoc\gamesdl\game\avartar.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<vector>
@@ -463,8 +445,7 @@
 	"power.h"
 	"item.h"
 
-1743318283 source:d:\dai hoc\gamesdl\game\avartar.cpp
-	"avartar.hpp"
+1743335651 source:d:\dai hoc\gamesdl\game\avartar.cpp
 	"avartar.hpp"
 
 1743146394 source:d:\dai hoc\gamesdl\game\move.cpp
@@ -474,27 +455,29 @@
 1743145255 d:\dai hoc\gamesdl\game\move.hpp
 	"comfunc.h"
 
-1743312231 d:\dai hoc\gamesdl\game\power.h
+1743333967 d:\dai hoc\gamesdl\game\power.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
 	"comfunc.h"
 
-1743312231 source:d:\dai hoc\gamesdl\game\power.cpp
+1743333920 source:d:\dai hoc\gamesdl\game\power.cpp
 	"power.h"
 
-1743312231 d:\dai hoc\gamesdl\game\item.h
+1743336115 d:\dai hoc\gamesdl\game\item.h
 	"Baseoject.h"
 	"comfunc.h"
 
-1743312231 source:d:\dai hoc\gamesdl\game\item.cpp
+1743336115 source:d:\dai hoc\gamesdl\game\item.cpp
 	"item.h"
 
-1743320271 source:d:\dai hoc\gamesdl\game\enemy.cpp
+1743335813 source:d:\dai hoc\gamesdl\game\enemy.cpp
+	"Enemy.h"
+	<cmath>
 	"Enemy.h"
 	<cmath>
 
-1743307539 d:\dai hoc\gamesdl\game\enemy.h
+1743335813 d:\dai hoc\gamesdl\game\enemy.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
@@ -510,6 +493,15 @@
 
 1735807588 c:\sdl2\sdl2_ttf-2.24.0\x86_64-w64-mingw32\include\sdl2\sdl_ttf.h
 	"SDL.h"
+	"begin_code.h"
+	"close_code.h"
+
+1738937080 c:\sdl2\sdl2_mixer-devel-2.8.1-mingw\sdl2_mixer-2.8.1\x86_64-w64-mingw32\include\sdl2\sdl_mixer.h
+	"SDL_stdinc.h"
+	"SDL_rwops.h"
+	"SDL_audio.h"
+	"SDL_endian.h"
+	"SDL_version.h"
 	"begin_code.h"
 	"close_code.h"
 

@@ -11,7 +11,7 @@ static SDL_Renderer* gRender = NULL;
 static  SDL_Event gEvent;
 
 
-const int WIDTH = 1000;
+const int WIDTH = 900;
 const int HEIGHT = 900;
 const int BBF = 32;
 const int Color_R = 167;
