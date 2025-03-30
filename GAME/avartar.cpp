@@ -1,4 +1,4 @@
-
+/*
 #include "avartar.hpp"
 
 // Constructor: Khởi tạo nhân vật
@@ -170,4 +170,216 @@ void AVARTAR::TakeDamage(int damage)
     health -= damage; // Giảm máu theo sát thương nhận được
     if (health < 0) health = 0; // Đảm bảo máu không âm
     std::cout << "Player health: " << health << std::endl; // In ra máu hiện tại để kiểm tra
+}
+*/
+#include "avartar.hpp"
+
+// Constructor: Khởi tạo nhân vật
+AVARTAR::AVARTAR(int player_id)
+{
+    this->player_id = player_id;
+    player_texture = NULL;
+    player_rect = {0, 0, 150, 150};
+    velX = 0;
+    velY = 0;
+    current_bullet_type = BULLET_NORMAL;
+    last_shot_time = 0;
+    health = 3;
+}
+
+// Destructor: Giải phóng texture của nhân vật và các viên đạn
+AVARTAR::~AVARTAR()
+{
+    if (player_texture != NULL) {
+        SDL_DestroyTexture(player_texture);
+        player_texture = NULL;
+    }
+    // Giải phóng tất cả đạn trong pows
+    for (auto pow : pows) {
+        delete pow;
+    }
+    pows.clear();
+}
+
+// Tải hình ảnh cho nhân vật
+bool AVARTAR::LoadImg(const char* name, SDL_Renderer* renderer)
+{
+    SDL_Surface* surface = IMG_Load(name);
+    if (surface == NULL) {
+        std::cout << "Không thể load ảnh: " << name << " - " << IMG_GetError() << std::endl;
+        return false;
+    }
+    player_texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_SetTextureBlendMode(player_texture, SDL_BLENDMODE_BLEND);
+    SDL_FreeSurface(surface);
+    return (player_texture != NULL);
+}
+
+// Đặt vị trí cho nhân vật
+void AVARTAR::SetPosition(int x, int y)
+{
+    player_rect.x = x;
+    player_rect.y = y;
+}
+
+// Vẽ nhân vật lên màn hình
+void AVARTAR::Draw(SDL_Renderer* renderer)
+{
+    SDL_RenderCopy(renderer, player_texture, NULL, &player_rect);
+}
+
+// Xử lý sự kiện (di chuyển, bắn đạn)
+void AVARTAR::HandleEvent(SDL_Event& e, SDL_Renderer* renderer)
+{
+    if (e.type == SDL_KEYDOWN) {
+        if (player_id == 1) { // Player 1: LEFT, RIGHT, UP, DOWN, 1
+            switch (e.key.keysym.sym) {
+                case SDLK_LEFT: velX = -1; break;
+                case SDLK_RIGHT: velX = 1; break;
+                case SDLK_UP: velY = -1; break;
+                case SDLK_DOWN: velY = 1; break;
+                case SDLK_1:
+                case SDLK_KP_1:
+                    Uint32 current_time = SDL_GetTicks();
+                    Uint32 delay = BULLET_NORMAL_DELAY;
+                    switch (current_bullet_type) {
+                        case BULLET_NORMAL: delay = BULLET_NORMAL_DELAY; break;
+                        case BULLET_FIRE: delay = BULLET_FIRE_DELAY; break;
+                        case BULLET_FAST: delay = BULLET_FAST_DELAY; break;
+                    }
+                    if (current_time - last_shot_time >= delay) {
+                        POW* new_pow = new POW();
+                        const char* bullet_path;
+                        int speed, width = 50, height = 50, damage = 3;
+                        switch (current_bullet_type) {
+                            case BULLET_NORMAL:
+                                bullet_path = "dan/1.png"; speed = BULLET_SPEED; break;
+                            case BULLET_FIRE:
+                                bullet_path = "dan/2.png"; speed = BULLET_SPEED; break;
+                            case BULLET_FAST:
+                                bullet_path = "dan/3.png"; speed = BULLET_SPEED * 2; break;
+                        }
+                        if (new_pow->LoadImg(bullet_path, renderer)) {
+                            new_pow->SetSize(width, height);
+                            new_pow->SetPosition(player_rect.x + player_rect.w / 2 - width / 2, player_rect.y - height);
+                            new_pow->SetDamage(damage);
+                            new_pow->SetDirection(0, -speed);
+                            pows.push_back(new_pow);
+                            last_shot_time = current_time;
+                            std::cout << "Player 1 Bullet fired! Type: " << current_bullet_type << std::endl;
+                        } else {
+                            std::cout << "Failed to load bullet image: " << bullet_path << std::endl;
+                            delete new_pow;
+                        }
+                    }
+                    break;
+            }
+        } else if (player_id == 2) { // Player 2: W, A, S, D, SPACE
+            switch (e.key.keysym.sym) {
+                case SDLK_a: velX = -1; break;
+                case SDLK_d: velX = 1; break;
+                case SDLK_w: velY = -1; break;
+                case SDLK_s: velY = 1; break;
+                case SDLK_SPACE:
+                    Uint32 current_time = SDL_GetTicks();
+                    Uint32 delay = BULLET_NORMAL_DELAY;
+                    switch (current_bullet_type) {
+                        case BULLET_NORMAL: delay = BULLET_NORMAL_DELAY; break;
+                        case BULLET_FIRE: delay = BULLET_FIRE_DELAY; break;
+                        case BULLET_FAST: delay = BULLET_FAST_DELAY; break;
+                    }
+                    if (current_time - last_shot_time >= delay) {
+                        POW* new_pow = new POW();
+                        const char* bullet_path;
+                        int speed, width = 50, height = 50, damage = 3;
+                        switch (current_bullet_type) {
+                            case BULLET_NORMAL:
+                                bullet_path = "dan/1.png"; speed = BULLET_SPEED; break;
+                            case BULLET_FIRE:
+                                bullet_path = "dan/2.png"; speed = BULLET_SPEED; break;
+                            case BULLET_FAST:
+                                bullet_path = "dan/3.png"; speed = BULLET_SPEED * 2; break;
+                        }
+                        if (new_pow->LoadImg(bullet_path, renderer)) {
+                            new_pow->SetSize(width, height);
+                            new_pow->SetPosition(player_rect.x + player_rect.w / 2 - width / 2, player_rect.y - height);
+                            new_pow->SetDamage(damage);
+                            new_pow->SetDirection(0, -speed);
+                            pows.push_back(new_pow);
+                            last_shot_time = current_time;
+                            std::cout << "Player 2 Bullet fired! Type: " << current_bullet_type << std::endl;
+                        } else {
+                            std::cout << "Failed to load bullet image: " << bullet_path << std::endl;
+                            delete new_pow;
+                        }
+                    }
+                    break;
+            }
+        }
+    } else if (e.type == SDL_KEYUP) {
+        if (player_id == 1) {
+            switch (e.key.keysym.sym) {
+                case SDLK_LEFT:
+                case SDLK_RIGHT: velX = 0; break;
+                case SDLK_UP:
+                case SDLK_DOWN: velY = 0; break;
+            }
+        } else if (player_id == 2) {
+            switch (e.key.keysym.sym) {
+                case SDLK_a:
+                case SDLK_d: velX = 0; break;
+                case SDLK_w:
+                case SDLK_s: velY = 0; break;
+            }
+        }
+    }
+}
+
+// Cập nhật vị trí của các viên đạn
+void AVARTAR::UpdatePows()
+{
+    for (auto it = pows.begin(); it != pows.end();) {
+        (*it)->Update();
+        SDL_Rect pow_rect = (*it)->GetRect();
+        if (pow_rect.y + pow_rect.h < 0) { // Nếu đạn ra khỏi màn hình
+            delete *it;
+            it = pows.erase(it);
+        } else {
+            ++it;
+        }
+    }
+}
+
+// Cập nhật vị trí của nhân vật
+void AVARTAR::UpdatePosition()
+{
+    player_rect.x += velX;
+    player_rect.y += velY;
+
+    if (player_rect.x < 0) player_rect.x = 0;
+    if (player_rect.y < 0) player_rect.y = 0;
+    if (player_rect.x > WIDTH - player_rect.w) player_rect.x = WIDTH - player_rect.w;
+    if (player_rect.y > HEIGHT - player_rect.h) player_rect.y = HEIGHT - player_rect.h;
+}
+
+// Kiểm tra va chạm với vật phẩm
+void AVARTAR::CheckCollisionWithItems(std::vector<Item*>& items)
+{
+    for (auto& item : items) {
+        if (!item->IsActive()) continue;
+
+        SDL_Rect item_rect = item->GetRect();
+        if (SDL_HasIntersection(&player_rect, &item_rect)) {
+            current_bullet_type = item->GetBulletType();
+            item->Deactivate();
+        }
+    }
+}
+
+// Xử lý khi nhân vật bị mất máu
+void AVARTAR::TakeDamage(int damage)
+{
+    health -= damage;
+    if (health < 0) health = 0;
+    std::cout << "Player " << player_id << " health: " << health << std::endl;
 }

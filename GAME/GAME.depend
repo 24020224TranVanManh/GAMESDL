@@ -401,15 +401,18 @@
 	"begin_code.h"
 	"close_code.h"
 
-1743310906 source:d:\dai hoc\gamesdl\game\game.cpp
+1743318144 source:d:\dai hoc\gamesdl\game\game.cpp
 	<iostream>
 	<SDL.h>
+	<SDL_image.h>
+	<SDL_ttf.h>
 	"Baseoject.h"
 	"comfunc.h"
 	"avartar.hpp"
 	"item.h"
 	"Enemy.h"
 	<cstdlib>
+	<string>
 	<iostream>
 	<SDL.h>
 	<SDL_image.h>
@@ -444,15 +447,22 @@
 	"Baseoject.h"
 	"comfunc.h"
 
-1743310567 d:\dai hoc\gamesdl\game\avartar.hpp
+1743318144 d:\dai hoc\gamesdl\game\avartar.hpp
 	"Baseoject.h"
 	"comfunc.h"
 	"power.h"
 	"item.h"
 	"Enemy.h"
 	<vector>
+	<SDL.h>
+	<SDL_image.h>
+	<vector>
+	"comfunc.h"
+	"power.h"
+	"item.h"
 
-1743309413 source:d:\dai hoc\gamesdl\game\avartar.cpp
+1743318283 source:d:\dai hoc\gamesdl\game\avartar.cpp
+	"avartar.hpp"
 	"avartar.hpp"
 
 1743146394 source:d:\dai hoc\gamesdl\game\move.cpp
@@ -462,29 +472,23 @@
 1743145255 d:\dai hoc\gamesdl\game\move.hpp
 	"comfunc.h"
 
-1743307129 d:\dai hoc\gamesdl\game\power.h
-	"Baseoject.h"
-	"comfunc.h"
+1743312231 d:\dai hoc\gamesdl\game\power.h
 	<SDL.h>
 	<SDL_image.h>
 	<iostream>
 	"comfunc.h"
 
-1743307129 source:d:\dai hoc\gamesdl\game\power.cpp
-	"POWER.h"
+1743312231 source:d:\dai hoc\gamesdl\game\power.cpp
 	"power.h"
 
-1743306629 d:\dai hoc\gamesdl\game\item.h
-	"Baseoject.h"
-	"comfunc.h"
+1743312231 d:\dai hoc\gamesdl\game\item.h
 	"Baseoject.h"
 	"comfunc.h"
 
-1743306680 source:d:\dai hoc\gamesdl\game\item.cpp
+1743312231 source:d:\dai hoc\gamesdl\game\item.cpp
 	"item.h"
 
-1743307539 source:d:\dai hoc\gamesdl\game\enemy.cpp
-	"Enemy.h"
+1743312231 source:d:\dai hoc\gamesdl\game\enemy.cpp
 	"Enemy.h"
 	<cmath>
 
