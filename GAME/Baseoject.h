@@ -1,4 +1,4 @@
-
+/*
 #include "comfunc.h"
 #ifndef BASEOJECT_H
 #define BASEOJECT_H
@@ -31,3 +31,28 @@ protected:
 };
 
 #endif
+*/
+#ifndef BASEOJECT_H
+#define BASEOJECT_H
+
+#include <SDL.h>
+#include <SDL_image.h>
+
+class Baseoject {
+public:
+    Baseoject();
+    ~Baseoject();
+    bool LoadImg(const char* path, SDL_Renderer* renderer);
+    void render(SDL_Renderer* renderer, const SDL_Rect* clip);
+    void free();
+
+    // Thêm getter để lấy texture
+    SDL_Texture* getTexture() const { return texture; }
+
+private:
+    SDL_Texture* texture;
+    int width;
+    int height;
+};
+
+#endif // BASEOJECT_H

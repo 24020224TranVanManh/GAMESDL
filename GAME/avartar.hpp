@@ -86,9 +86,9 @@ public:
 private:
     int player_id; // Biến để xác định người chơi (1 hoặc 2)
     Uint32 last_shot_time;
-    static const Uint32 BULLET_NORMAL_DELAY = 500; // Điều chỉnh delay nếu cần
+    static const Uint32 BULLET_NORMAL_DELAY = 300; // Điều chỉnh delay nếu cần
     static const Uint32 BULLET_FIRE_DELAY = 500;
-    static const Uint32 BULLET_FAST_DELAY = 500;
+    static const Uint32 BULLET_FAST_DELAY = 200;
     std::vector<POW*> pows;
     SDL_Texture* player_texture;
     SDL_Rect player_rect;

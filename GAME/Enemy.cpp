@@ -115,7 +115,7 @@ void AdvancedEnemy::Render(SDL_Renderer* renderer)
 void AdvancedEnemy::Shoot(SDL_Renderer* renderer)
 {
     Uint32 current_time = SDL_GetTicks();
-    const Uint32 shoot_delay = 3000;
+    const Uint32 shoot_delay = 5000;
     if (current_time - last_shot_time >= shoot_delay) {
         POW* new_pow = new POW();
         if (new_pow->LoadImg("dan/1.png", renderer)) {
@@ -194,7 +194,7 @@ void Boss::Render(SDL_Renderer* renderer)
 void Boss::Shoot(SDL_Renderer* renderer)
 {
     Uint32 current_time = SDL_GetTicks();
-    const Uint32 shoot_delay = 2000; // Bắn mỗi 2 giây
+    const Uint32 shoot_delay = 3000; // Bắn mỗi 2 giây
     if (current_time - last_shot_time >= shoot_delay) {
         // Bắn đạn về 5 hướng (góc 0, 45, 90, 135, 180 độ)
         float angles[] = {0, M_PI/4, M_PI/2, 3*M_PI/4, M_PI}; // Đơn vị radian

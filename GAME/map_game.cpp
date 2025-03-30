@@ -1,4 +1,4 @@
-#include"Baseoject.h"
+/*#include"Baseoject.h"
 #include"comfunc.h"
 #include"map_game.hpp"
 
@@ -85,4 +85,4 @@ void GameMap::DrawMap(SDL_Renderer* screen)
         }
         maP_y++;
     }
-}
+}*/
