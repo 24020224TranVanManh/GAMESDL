@@ -10,6 +10,7 @@ static SDL_Window* gWindow = NULL;
 static SDL_Renderer* gRender = NULL;
 static  SDL_Event gEvent;
 
+
 const int WIDTH = 736;
 const int HEIGHT = 900;
 const int BBF = 32;

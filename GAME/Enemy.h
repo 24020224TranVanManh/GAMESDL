@@ -1,51 +1,119 @@
+/*
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "Baseoject.h"
-#include "comfunc.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
 #include <vector>
+#include "comfunc.h"
+#include "power.h"
 
-// Lớp Enemy kế thừa từ Baseoject, đại diện cho quái vật trong game
-class Enemy : public Baseoject
-{
+class Enemy {
+protected:
+    SDL_Rect enemy_rect;
+    SDL_Texture* enemy_texture;
+    float velY;
+    float posY;
+    int health;
+
 public:
-    Enemy();  // Constructor mặc định
-    ~Enemy(); // Destructor để giải phóng tài nguyên
-
-    // Tải hình ảnh cho quái từ đường dẫn file
+    Enemy();
+    virtual ~Enemy();
+    virtual bool Update();
+    virtual void Render(SDL_Renderer* renderer);
     bool LoadImg(const char* path, SDL_Renderer* renderer);
-
-    // Đặt vị trí ban đầu cho quái
-    void SetPosition(int x, int y);
-
-    // Cập nhật vị trí quái: di chuyển xuống dưới, trả về false nếu quái ra khỏi map
-    bool Update();
-
-    // Vẽ quái lên màn hình
-    void Render(SDL_Renderer* renderer);
-
-    // Đặt tốc độ di chuyển của quái (sử dụng float để hỗ trợ giá trị thập phân)
-    void SetSpeed(float speed) { move_speed = speed; }
-
-    // Lấy hình chữ nhật bao quanh quái để kiểm tra va chạm
-    SDL_Rect GetRect() const { return enemy_rect; }
-
-    // Kiểm tra quái còn sống hay không
-    bool IsAlive() const { return is_alive; }
-
-    // Xử lý khi quái bị trúng đạn và mất máu
+    virtual void SetPosition(int x, int y);
+    SDL_Rect GetRect() { return enemy_rect; }
     void TakeDamage(int damage);
+    bool IsAlive() { return health > 0; }
+};
 
-    // Lấy giá trị máu hiện tại của quái
-    int GetHealth() const { return health; }
-
+class AdvancedEnemy : public Enemy {
 private:
-    SDL_Rect enemy_rect;     // Hình chữ nhật bao quanh quái (vị trí và kích thước)
-    SDL_Texture* enemy_texture; // Texture chứa hình ảnh của quái
-    float velY;              // Vận tốc di chuyển theo trục Y (chỉ di chuyển xuống, đổi sang float)
-    float move_speed;        // Tốc độ di chuyển của quái (đổi sang float)
-    int health;              // Lượng máu của quái
-    bool is_alive;           // Trạng thái sống/chết của quái
+    float velX;
+    float posX;
+    Uint32 last_shot_time;
+    std::vector<POW*> enemy_pows;
+
+public:
+    AdvancedEnemy();
+    ~AdvancedEnemy();
+    bool Update() override;
+    void Render(SDL_Renderer* renderer) override;
+    void Shoot(SDL_Renderer* renderer);
+    void SetPosition(int x, int y) override;
+    std::vector<POW*>& GetPows() { return enemy_pows; }
+    float GetVelX() const { return velX; }       // Thêm getter
+    void SetVelX(float newVelX) { velX = newVelX; } // Thêm setter
+};
+
+#endif // ENEMY_H
+*/
+#ifndef ENEMY_H
+#define ENEMY_H
+
+#include <SDL.h>
+#include <SDL_image.h>
+#include <iostream>
+#include <vector>
+#include "comfunc.h"
+#include "power.h"
+
+class Enemy {
+protected:
+    SDL_Rect enemy_rect;
+    SDL_Texture* enemy_texture;
+    float velY;
+    float posY;
+    int health;
+
+public:
+    Enemy();
+    virtual ~Enemy();
+    virtual bool Update();
+    virtual void Render(SDL_Renderer* renderer);
+    bool LoadImg(const char* path, SDL_Renderer* renderer);
+    virtual void SetPosition(int x, int y);
+    SDL_Rect GetRect() { return enemy_rect; }
+    void TakeDamage(int damage);
+    bool IsAlive() { return health > 0; }
+};
+
+class AdvancedEnemy : public Enemy {
+private:
+    float velX;
+    float posX;
+    Uint32 last_shot_time;
+    std::vector<POW*> enemy_pows;
+
+public:
+    AdvancedEnemy();
+    ~AdvancedEnemy();
+    bool Update() override;
+    void Render(SDL_Renderer* renderer) override;
+    void Shoot(SDL_Renderer* renderer);
+    void SetPosition(int x, int y) override;
+    std::vector<POW*>& GetPows() { return enemy_pows; }
+    float GetVelX() const { return velX; }
+    void SetVelX(float newVelX) { velX = newVelX; }
+};
+
+class Boss : public Enemy {
+private:
+    float velX;  // Vận tốc ngang
+    float posX;  // Vị trí thực tế X
+    Uint32 last_shot_time;
+    std::vector<POW*> boss_pows;
+
+public:
+    Boss();
+    ~Boss();
+    bool Update() override;
+    void Render(SDL_Renderer* renderer) override;
+    void Shoot(SDL_Renderer* renderer); // Bắn về nhiều phía
+    void SetPosition(int x, int y) override;
+    std::vector<POW*>& GetPows() { return boss_pows; }
 };
 
 #endif // ENEMY_H

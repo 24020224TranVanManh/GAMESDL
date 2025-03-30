@@ -36,21 +36,24 @@ class POW {
 private:
     SDL_Rect pow_rect;
     SDL_Texture* pow_texture;
-    int velX, velY;
     int damage;
+    float velX;  // Vận tốc theo trục X
+    float velY;  // Vận tốc theo trục Y
+    float posX;  // Vị trí thực tế theo trục X
+    float posY;  // Vị trí thực tế theo trục Y
 
 public:
     POW();
     ~POW();
     bool LoadImg(const char* path, SDL_Renderer* renderer);
-    void SetSize(int w, int h);
     void SetPosition(int x, int y);
-    void SetDirection(int x, int y);
-    void SetDamage(int d); // Chỉ khai báo, không định nghĩa inline
-    void Update();
+    void SetSize(int w, int h);
+    void SetDamage(int dmg);
+    void SetDirection(float vx, float vy); // Đặt vận tốc
+    void Update(); // Cập nhật vị trí
     void Render(SDL_Renderer* renderer);
-    SDL_Rect GetRect() { return pow_rect; }
-    int GetDamage() { return damage; }
+    SDL_Rect GetRect() const { return pow_rect; }
+    int GetDamage() const { return damage; }
 };
 
 #endif // POWER_H
