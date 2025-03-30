@@ -61,7 +61,7 @@ void AVARTAR::HandleEvent(SDL_Event& e, SDL_Renderer* renderer) {
                 case SDLK_UP: velY = -2; break;   // Nhấn phím UP: di chuyển lên trên (vận tốc Y âm)
                 case SDLK_DOWN: velY = 2; break;  // Nhấn phím DOWN: di chuyển xuống dưới (vận tốc Y dương)
                 case SDLK_1: // Nhấn phím 1 hoặc phím 1 trên bàn phím số để bắn đạn
-                case SDLK_KP_0:
+                case SDLK_KP_1:
                     Uint32 current_time = SDL_GetTicks(); // Lấy thời gian hiện tại (ms)
                     Uint32 delay = BULLET_NORMAL_DELAY; // Thời gian chờ mặc định giữa các lần bắn
                     switch (current_bullet_type) { // Điều chỉnh thời gian chờ dựa trên loại đạn
